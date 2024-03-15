@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rastgele Sayı Üretici</title>
+</head>
+<body>
+    <form onsubmit="rastgeleSayiUret">
+      <table>
+        <tbody>
+            <tr>
+                <td>
+                    <label for="minInput">Minimum Değer:</label>
+                </td>
+                <td>
+                    <input type="range" id="minInput">
+                </td>
+                <td>
+                    <button type="button" onclick="secClick()">Seç</button>
+                    <input type="text" id="minValue" name="minValue" disabled />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="maxInput">Maksimum Değer:</label>
+                </td>
+                <td>
+                    <input type="range" id="maxInput">
+                </td>
+                <td>
+                    <button type="button" onclick="secClick2()">Seç</button>
+                    <input type="text" id="maxValue" name="maxValue" disabled />
+                </td>
+            </tr>
+        </tbody>
+      </table>
+    </form>
+    <button onclick="rastgeleSayiUret()">Rastgele Sayı Üret</button>
+    <input type="text" id="sonucLabel"></input>
+
+    <script>
+        function secClick(){
+        const minInput=document.getElementById("minInput").value;
+        document.getElementById("minValue").value=minInput;
+        }
+        function secClick2(){
+        const maxInput=document.getElementById("maxInput").value;
+        document.getElementById("maxValue").value=maxInput;
+        }
+        function rastgeleSayiUret(event) {
+            const min = parseInt(document.getElementById("minInput").value);
+            const max = parseInt(document.getElementById("maxInput").value);
+
+            const rastgeleSayi = Math.floor(Math.random() * (max - min + 1)) + min;
+
+            document.getElementById("sonucLabel").value = `Rastgele Sayı: ${rastgeleSayi}`;
+        }
+    </script>
+</body>
+</html>

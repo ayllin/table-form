@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      table#siparisTable,
+      table#siparisTable th,
+      table#siparisTable td {
+        border: 1px solid black;
+      }
+
+      table#siparisTable {
+        background-color: lightyellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Kisiye Özel Tisört Siparis Araci</h1>
+    <hr />
+    <h4>Lütfen olusturmak istediginiz siparise iliskin asagidaki bilgileri doldurunuz.</h4>
+    <form onsubmit="gonder(event)">
+      <h2>Kişisel Bilgiler</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td><label for="name">Adınız:</label></td>
+            <td><input type="text" id="name" name="name" /></td>
+          </tr>
+          <tr>
+            <td><label for="surname">Soyadınız:</label></td>
+            <td><input type="text" id="surname" name="surname" /></td>
+          </tr>
+          <tr>
+            <td><label for="birthDate">Doğum Tarihiniz:</label></td>
+            <td><input type="date" id="birthDate" name="birthDate" /></td>
+          </tr>
+          <tr>
+            <td><label for="email">Mail adresiniz:</label></td>
+            <td><input type="email" id="email" name="email" /></td>
+          </tr>
+          <tr>
+            <td><label for="phone">Telefon:</label></td>
+            <td><input type="tel" id="phone" name="phone" /></td>
+          </tr>
+          <tr>
+            <td><input type="submit" value="Gönder" /></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <hr />
+    </form>
+    <script>
+      function gonder(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        const name = data.name;
+        const surname = data.surname;
+        const birthDate = data.birthDate;
+        const email = data.email;
+        const phone = data.phone;
+        document.getElementById("tname").value = name;
+        document.getElementById("tsurname").value = surname;
+        document.getElementById("tbirth").value=birthDate;
+        document.getElementById("tmail").value=email;
+        document.getElementById("tphone").value=phone;
+
+      }
+    </script>
+    <br>
+    <form onsubmit="kaydet(event)">
+        <h2>Sipariş Bilgileri</h2>
+        <table>
+          <tbody>
+            <tr>
+              <td><label for="color">Tişört rengi:</label></td>
+              <td><input type="color" id="color" name="color" /></td>
+            </tr>
+            <tr>
+                <td><label for="color">Yazi Rengi:</label></td>
+                <td><input type="color" id="color2" name="yazi" /></td>
+            </tr>
+            <tr>
+                <td><label for="text">Tisört üzerinde yazacak yaziyi girin:</label></td>
+                <td><input type="text" id="metin" name="metin" /></td>
+            </tr>
+            <tr>
+                <td><label for="text">Tisört Adeti:</label></td>
+                <td><input type="number" id="menge" name="menge" /></td>
+            </tr>
+            <tr>
+              <td><label for="range">Beden Seçiniz:</label></td>
+              <td>
+                <input
+                  type="range"
+                  id="range"
+                  name="range"
+                  min="0"
+                  max="5"
+                  step="1"
+                  list="steplist"
+                />
+                <datalist id="steplist">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </datalist>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button" onclick="secClick()">Seç</button>
+                <input type="text" id="beden" name="beden" disabled />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <tr>
+          <td><input type="submit" value="Kaydet" /></td>
+        </tr>
+      </form>
+      
+      <script>
+        function secClick() {
+          const range = document.getElementById("range");
+          const beden = document.getElementById("beden");
+          const bedenler = ["XS", "S", "M", "L", "XL", "XXL"];
+          beden.value = bedenler[range.value];
+        }
+  
+        function kaydet(event) {
+          event.preventDefault();
+          const form = event.target;
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData);
+          const color = data.color;
+          const yazi_renk= data.color2;
+          const yazi_bilgi=data.metin;
+          const menge=data.menge;
+          const bedentür=data.beden;
+          const range = data.range;
+          const beden = document.getElementById("beden").value;
+          document.getElementById("tshirt_color").value=color;
+          document.getElementById("farbe").value=yazi_renk;
+          document.getElementById("yazi_bilgi").value=yazi_bilgi;
+          document.getElementById("adet").value=menge;
+          document.getElementById("tbeden").value=beden;
+          // document.getElementById(
+          //   "sonuc"
+          // ).innerText = `Renk: ${color}, beden: ${beden}`;
+        }
+      </script>
+      <hr />
+      <br>
+      <form onsubmit="senden(event)"> 
+      <h2>Teslimat Bilgileri</h2>
+      <table>
+        <tbody>
+            <tr>
+                <td><label for="adress">Adres:</label></td>
+                <td><input type="text" id="anschrift" name="anschrift" /></td>
+            </tr>
+            <tr>
+                <td><label for="week">Teslim tarihi icin bir aralik seciniz:</label></td>
+                <td><input type="week" id="week" name="week" /></td>
+            </tr>
+        </tbody>
+      </table>
+      <br>
+      <tr>
+        <td><input type="submit" value="Kaydet" /></td>
+      </tr>
+    </form>
+    <script>
+      function senden(event){
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        const adres=data.anschrift;
+        const tarih=data.week;
+        document.getElementById("tadress").value=adres;
+        document.getElementById("teslim_tarih").value=tarih;
+      }
+    </script>
+      <hr />
+      <br>
+      <form onsubmit="send(event)">
+      <h2>Ödeme Bilgileri</h2>
+      <table>
+        <tbody>
+            <tr>
+                <td><label for="isim">Ad Soyad:</label></td>
+                <td><input type="text" id="vorname"/></td>
+            </tr>
+            <tr>
+                <td><label for="numara">Kart Numarasi:</label></td>
+                <td> <input type="text" id="kartenummer"/></td>
+            </tr>
+            <tr>
+                <td><label for="date">Son Kullanma Tarihi:</label></td>
+                <td><input type="month" id="datum"/></td>
+            </tr>
+            <tr>
+                <td><label for="number">CVV:</label></td>
+                <td><input type="number" id="sicherheitscode"/></td>
+            </tr>
+        </tbody>
+      </table>
+      <br>
+      <tr>
+        <td><input type="submit" value="Kaydet" /></td>
+      </tr>
+    </form>
+    <script>
+      function send(event){
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData); 
+        const vorname=data.vorname;
+        const kartenummer=data.kartenummer;
+        const datum=data.datum;
+        const sicherheitscode=data.sicherheitscode;
+        document.getElementById("tvorname").value=vorname;
+        document.getElementById("tkartenummer").value=kartenummer;
+        document.getElementById("tdatum").value=datum;
+        document.getElementById("sicherercode").value=sicherheitscode;    
+      }
+    </script>
+      <br>
+      <hr>
+      <br>
+      <table id="siparisTable">
+        <thead>
+          <tr>
+            <th colspan="3">SIPARIŞ ONAY</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th rowspan="5">Kişisel Bilgiler</th>
+            <td>Ad:</td>
+            <td><input type="text" id="tname" disabled /></td>
+          </tr>
+          <tr><td>Soyad:</td>
+            <td><input type="text" id="tsurname" disabled /></td></tr>
+            <tr><td>Dogum tarihi:</td>
+                <td><input type="datetime" id="tbirth" disabled /></td></tr>
+                <tr><td>Mail Adresi:</td>
+                    <td><input type="mail" id="tmail" disabled /></td></tr>
+                    <tr><td>Telefon:</td>
+                        <td><input type="tel" id="tphone" disabled /></td></tr>
+          <tr>
+            <th rowspan="5">Siparis Bilgileri</th>
+            <td>Tisört Rengi:</td>
+            <td><input type="renk" id="tshirt_color" disabled /></td>
+          </tr>
+          <tr><td>Yazi Rengi:</td>
+            <td><input type="renk" id="farbe" disabled /></td></tr>
+            <tr><td>Yazi:</td>
+                <td><input type="text" id="yazi_bilgi" disabled /></td></tr>
+            <tr><td>Tisört Adeti:</td>
+                <td><input type="number" id="adet" disabled /></td> 
+            </tr>
+            <tr><td>Tisört Bedeni:</td>
+                <td><input type="bedentür" id="tbeden" disabled /></td> 
+            </tr>
+        </tr>
+        <tr>
+            <th rowspan="2">Teslimat Bilgileri</th>
+            <td>Adres:</td>  
+            <td><input type="text" id="tadress" disabled /></td>
+        </tr> 
+        <tr><td>Teslimat Tarihi:</td>
+            <td><input type="datetime" id="teslim_tarih" disabled /></td>
+        </tr>
+        <tr>
+            <th rowspan="5">Ödeme Bilgileri</th>
+            <td>Ad Soyad:</td>
+            <td><input type="text" id="tvorname" disabled /></td>
+        </tr>
+        <tr>
+            <td>Kart Numarasi:</td>
+            <td><input type="number" id="tkartenummer" disabled /></td>
+        </tr>
+        <tr>
+            <td>Son Kullanma Tarihi:</td>
+            <td><input type="datetime" id="tdatum" disabled /></td>
+        </tr>
+        <tr>
+            <td>CVV:</td>
+            <td><input type="number" id="sicherercode" disabled /></td>
+        </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <button>Tamamla</button>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahmin Oyunu</title>
+</head>
+<body>
+    <h1>Tahmin Oyunu</h1>
+    <p>1 ile 100 arasında rastgele bir sayıyı tahmin et!</p>
+    <table>
+      <tr>
+        <td>
+          <label id="maxTahmin">Tahmini giriniz:</label>
+        </td>
+        <td>   <input type="number" id="tahmin" placeholder="Tahmininizi girin">
+        </td>
+      </tr>
+    </table>
+    <button onclick="checkGuess()">Tahmin Et</button>
+    <h4 id="sonuc"></h4>
+
+    <script>
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        let sayac = 0;
+        let maxSayac=7;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('tahmin').value);
+            sayac++;
+          document.getElementById("maxTahmin").textContent=sayac+ ".tahmini girin";
+            if (isNaN(guess)) {
+                document.getElementById('sonuc').textContent = 'Lütfen geçerli bir sayı girin.';
+            } else if(sayac === maxSayac){
+              document.getElementById('sonuc').textContent = 'Deneme Hakkiniz kalmadi';
+              document.getElementById("sonuc").textContent = `Üzgünüm, doğru cevap ${randomNumber}`;
+
+            }
+            else if (guess === randomNumber) {
+              document.getElementById('sonuc').textContent = `Tebrikler! ${sayac} denemede doğru tahmin ettiniz.`;
+            } else if (guess < randomNumber) {
+                document.getElementById('sonuc').textContent = 'Daha büyük bir sayı girin.';
+            }else if (guess > randomNumber) 
+            document.getElementById('sonuc').textContent = 'Daha küçük bir sayı girin.';
+            }
+    </script>
+</body>
+</html>
